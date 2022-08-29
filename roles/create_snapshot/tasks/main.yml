@@ -1,0 +1,28 @@
+---
+- name: Find Folder using name
+  community.vmware.vmware_guest_find:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    name: "{{ vm_name }}"
+    validate_certs: false
+  # delegate_to: localhost
+  register: vm_folder
+
+# - name: Debug vm_folder
+#   debug:
+#     var: vm_folder['folders'][0]
+
+- name: Create a snapshot
+  community.vmware.vmware_guest_snapshot:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    folder: "{{ vm_folder['folders'][0] }}"
+    name: "{{ vm_name }}"
+    state: present
+    snapshot_name: "{{ vm_snapshot_name }}.{{ ansible_date_time.iso8601_basic_short }}"
+    description: "{{ snap_description }}.{{ ansible_date_time.iso8601_basic_short }}"
+    validate_certs: false
+  # delegate_to: localhost
