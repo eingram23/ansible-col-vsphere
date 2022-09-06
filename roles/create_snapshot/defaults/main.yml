@@ -3,6 +3,5 @@ vcenter_hostname: vcsa.local.lan
 vcenter_username: "{{ lookup('hashi_vault','secret=secret/data/vsphere/vcsa:vsphere_username') }}"
 vcenter_password: "{{ lookup('hashi_vault','secret=secret/data/vsphere/vcsa:vsphere_password') }}"
 vcenter_datacenter: "Homelab Datacenter"
-# folder: "/{{ datacenter_name }}/vm/"
 vm_snapshot_name: "snapshot"
 snap_description: "snapshot"

@@ -6,12 +6,7 @@
     password: "{{ vcenter_password }}"
     name: "{{ vm_name }}"
     validate_certs: false
-  # delegate_to: localhost
   register: vm_folder
-
-# - name: Debug vm_folder
-#   debug:
-#     var: vm_folder['folders'][0]
 
 - name: Create a snapshot
   community.vmware.vmware_guest_snapshot:
@@ -25,4 +20,3 @@
     snapshot_name: "{{ vm_snapshot_name }}.{{ ansible_date_time.iso8601_basic_short }}"
     description: "{{ snap_description }}.{{ ansible_date_time.iso8601_basic_short }}"
     validate_certs: false
-  # delegate_to: localhost
