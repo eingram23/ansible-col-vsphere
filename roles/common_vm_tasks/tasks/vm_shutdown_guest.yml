@@ -1,0 +1,21 @@
+---
+- name: Find Folder using name
+  community.vmware.vmware_guest_find:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    name: "{{ vm_name }}"
+    validate_certs: false
+  register: vm_folder
+
+- name: Shutdown VM guest
+  community.vmware.vmware_guest_powerstate:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    folder: "{{ vm_folder['folders'][0] }}"
+    name: "{{ vm_name }}"
+    state: shutdown-guest
+    state_change_timeout: 120
+    validate_certs: false
