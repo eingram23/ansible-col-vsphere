@@ -1,0 +1,17 @@
+- name: Add disk to virtual machine
+  community.vmware.vmware_guest_disk:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ vm_name }}"
+    validate_certs: false
+    disk:
+      - size_gb: "{{ vmdk_size }}"
+        type: thin
+        datastore: "{{ datastore }}"
+        state: present
+        scsi_controller: 1
+        unit_number: 1
+        scsi_type: 'paravirtual'
+        disk_mode: 'persistent'
