@@ -7,7 +7,3 @@
     name: "{{ vm_name }}"
     validate_certs: false
   register: disk_info
-
-- name: show disk info
-  ansible.builtin.debug:
-    var: disk_info
