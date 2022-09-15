@@ -7,3 +7,4 @@
     name: "{{ vm_name }}"
     validate_certs: false
   register: disk_info
+

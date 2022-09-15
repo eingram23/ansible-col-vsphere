@@ -8,7 +8,10 @@
     validate_certs: false
   register: disk_info
 
-
+- name: Set unit_number if not defined
+  ansible.builtin.set_fact:
+    unit_number: "{{ ((disk_info['guest_disk_info'] | count) + 1) | int }}"
+  when: unit_number is not defined
 
 - name: Add disk to virtual machine
   community.vmware.vmware_guest_disk:
@@ -23,7 +26,7 @@
         type: thin
         datastore: "{{ datastore }}"
         state: present
-        scsi_controller: 1
-        unit_number: 1
+        scsi_controller: 0
+        unit_number: "{{ unit_number }}"
         scsi_type: 'paravirtual'
         disk_mode: 'persistent'
