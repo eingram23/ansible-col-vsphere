@@ -1,0 +1,12 @@
+- name: Get vm disk facts
+  community.vmware.vmware_guest_disk_info:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    datacenter: "{{ vcenter_datacenter }}"
+    name: "{{ vm_name }}"
+  register: disk_info
+
+- name: show disk info
+  ansible.builtin.debug:
+    var: disk_info
