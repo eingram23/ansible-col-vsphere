@@ -5,6 +5,7 @@
     password: "{{ vcenter_password }}"
     datacenter: "{{ vcenter_datacenter }}"
     name: "{{ vm_name }}"
+    validate_certs: false
   register: disk_info
 
 - name: show disk info
