@@ -1,0 +1,11 @@
+---
+- name: Create a snapshot
+  hosts: localhost
+  become: false
+  gather_facts: true
+
+  tasks:
+  
+    - import_role:
+        name: eingram23.vsphere.common
+        tasks_from: vm_create_snap
