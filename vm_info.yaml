@@ -1,0 +1,11 @@
+---
+- name: Get VM info
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+
+    - ansible.builtin.include_role:
+        name: eingram23.vsphere.common
+        tasks_from: vm_info

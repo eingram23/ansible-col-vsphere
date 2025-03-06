@@ -1,0 +1,11 @@
+- name: Get VM info
+  community.vmware.vmware_vm_info:
+    hostname: vcsa-1.local.lan
+    username: "{{ lookup('hashi_vault', 'secret/vsphere/vcsa:vsphere_username') }}"
+    password: "{{ lookup('hashi_vault', 'secret/vsphere/vcsa:vsphere_password') }}"
+    validate_certs: false
+    vm_name: "{{ vm_name }}"
+  register: vm_info
+
+- debug:
+    var: vm_info.virtual_machines[0].moid
